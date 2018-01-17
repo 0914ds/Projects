@@ -1,0 +1,36 @@
+package com.qk365.sample;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.qk365.base.controller.ControllerTemplate;
+import com.qk365.base.utils.ResultUtils;
+import com.qk365.base.vo.ResultVO;
+
+/**
+ * sample
+ */
+@Controller
+@RequestMapping("/sample")
+public class SampleController extends ControllerTemplate {
+
+	@Autowired
+	private SampleService sampleService;
+
+	/**
+	 * sample
+	 */
+	@RequestMapping(value = "/sample")
+	public void sample(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "str", required = true) String str) {
+		ResultVO result = ResultUtils.buildSuccessData(sampleService.sample1());
+		result.setValue(sampleService.sample2());
+		result.setMessage(str);
+		this.outputResult(result, request, response);
+	}
+}
