@@ -4,24 +4,24 @@
  * @author lzhoumail@126.com/zhouli
  * Git http://git.oschina.net/zhou666/spring-cloud-7simple
  */
-package cloud.simple.service;
+package seckill.web.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
-import cloud.seckilled.service.dto.Exposer;
-import cloud.seckilled.service.model.Seckill;
-import cloud.simple.model.User;
+import seckill.common.dto.Exposer;
+import seckill.common.dto.SeckillExecution;
+import seckill.common.model.Seckill;
+import seckill.common.tools.Tools;
 
 @Service
-public class webService {
+public class WebService {
 	 @Autowired	 
 	 RestTemplate restTemplate;
 	
@@ -57,39 +57,42 @@ public class webService {
 	            return new Exposer(false, seckillId, nowTime.getTime(), startTime.getTime(), endTime.getTime());
 	        }
 
-	        //转化特定字符串的过程,不可逆
-	        String md5 = getMD5(seckillId);
+	        String md5 = Tools.getMD5(seckillId);
 	        return new Exposer(true, md5, seckillId);
 	 }
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 @HystrixCommand(fallbackMethod = "fallbackSearchAll")
-	 public List<User> readUserInfo() {
-	        return restTemplate.getForObject("http://"+SERVICE_NAME+"/user", List.class);
-		 //return feignUserService.readUserInfo();
-	 }	 
-	 private List<User> fallbackSearchAll() {
-		 System.out.println("HystrixCommand fallbackMethod handle!");
-		 List<User> ls = new ArrayList<User>();
-		 User user = new User();
-		 user.setUsername("TestHystrixCommand");
-		 ls.add(user);
-		 return ls;
+
+	 public SeckillExecution execute(Long seckillId,Long killPhone, String md5) {
+		 return restTemplate.getForObject("SERVICE_NAME"+"/{seckillId}/{killPhone}/{md5}", SeckillExecution.class, seckillId,md5,killPhone);
 	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+//	 @HystrixCommand(fallbackMethod = "fallbackSearchAll")
+//	 public List<User> readUserInfo() {
+//	        return restTemplate.getForObject("http://"+SERVICE_NAME+"/user", List.class);
+//		 //return feignUserService.readUserInfo();
+//	 }	 
+//	 private List<User> fallbackSearchAll() {
+//		 System.out.println("HystrixCommand fallbackMethod handle!");
+//		 List<User> ls = new ArrayList<User>();
+//		 User user = new User();
+//		 user.setUsername("TestHystrixCommand");
+//		 ls.add(user);
+//		 return ls;
+//	 }
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cloud.simple.model.User;
-import cloud.simple.service.UserService;
+import cloud.simple.service.webService;
 
 
 
@@ -24,7 +24,7 @@ import cloud.simple.service.UserService;
 public class UserController {
 		
 	@Autowired(required=true)
-	UserService userService;
+	webService userService;
 	
 	//@Autowired
 	//FeignUserService feignUserService;

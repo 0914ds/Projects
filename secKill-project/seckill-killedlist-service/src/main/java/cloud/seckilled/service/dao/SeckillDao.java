@@ -2,11 +2,10 @@ package cloud.seckilled.service.dao;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import cloud.seckilled.service.model.Seckill;
+import seckill.common.model.Seckill;
 
 /**
  * Created by wchb7 on 16-5-8.

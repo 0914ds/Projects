@@ -1,9 +1,11 @@
-package cloud.seckilled.service.domain;
-
+package cloud.seckilled.service.service;
 import java.util.List;
 
-import cloud.seckilled.service.dto.Exposer;
-import cloud.seckilled.service.model.Seckill;
+import seckill.common.dto.SeckillExecution;
+import seckill.common.exception.RepeatKillException;
+import seckill.common.exception.SeckillCloseException;
+import seckill.common.exception.SeckillException;
+import seckill.common.model.Seckill;
 
 /**
  * Created by wchb7 on 16-5-13.
@@ -31,12 +33,14 @@ public interface SeckillService {
 
 
     /**
-     * 秒杀开启时输出秒杀接口地址
-     * 否则输出系统时间和秒杀时间
+     * 执行秒杀操作
      *
      * @param seckillId
+     * @param userPhone
+     * @param md5
      * @return
      */
-    Exposer exportSeckillUrl(Long seckillId);
-
+    SeckillExecution executeSeckill(Long seckillId, Long userPhone, String md5) throws SeckillException
+            , RepeatKillException, SeckillCloseException;
+    
 }
