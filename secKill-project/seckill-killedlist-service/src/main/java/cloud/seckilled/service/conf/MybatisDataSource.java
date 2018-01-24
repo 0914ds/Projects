@@ -17,6 +17,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import cloud.seckilled.service.dao.RedisDao;
+
 @Configuration
 @EnableConfigurationProperties(DataSourceProperties.class)
 //mybaits dao 搜索路径
@@ -74,7 +76,14 @@ public class MybatisDataSource {
 	}
 	
 	@Bean
+	public RedisDao redisDao() {
+      return  new RedisDao("localhost",6379);
+	}
+	
+	@Bean
 	public PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
+	
+	
 }
