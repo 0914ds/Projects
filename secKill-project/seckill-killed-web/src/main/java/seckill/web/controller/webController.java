@@ -6,13 +6,13 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import seckill.common.dto.Exposer;
 import seckill.common.dto.SeckillExecution;
@@ -23,7 +23,7 @@ import seckill.common.exception.SeckillCloseException;
 import seckill.common.model.Seckill;
 import seckill.web.service.WebService;
 
-@RestController
+@Controller
 @RequestMapping("/seckill")
 public class webController {
 
@@ -31,7 +31,11 @@ public class webController {
 
 	@Autowired
 	private WebService webService;
-	
+
+	@RequestMapping(value = "/")
+	public String indexJsp() {
+		return "index";
+	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
@@ -39,7 +43,7 @@ public class webController {
 		// 获取列表页
 		List<Seckill> list = webService.getSeckillList();
 		model.addAttribute("list", list);
-        System.out.println("list.size===================>: "+list.size());
+		System.out.println("list.size===================>: " + list.size());
 		return "list";
 	}
 
@@ -51,7 +55,7 @@ public class webController {
 		}
 
 		Seckill seckill = webService.getById(seckillId);
-		System.out.println("seckill.toString===================>"+seckill.toString());
+		System.out.println("seckill.toString=================seckill.toString======>=====>=>=>===>>>>>>" + seckill.toString());
 
 		if (seckill == null) {
 			return "forward:/seckill/list";
@@ -112,11 +116,11 @@ public class webController {
 		}
 
 	}
-    
-    @RequestMapping(value = "/time/now", method = RequestMethod.GET)
-    @ResponseBody
-    public SeckillResult<Long> time() {
-        Date now = new Date();
-        return new SeckillResult(true, now.getTime());
-    }
+
+	@RequestMapping(value = "/time/now", method = RequestMethod.GET)
+	@ResponseBody
+	public SeckillResult<Long> time() {
+		Date now = new Date();
+		return new SeckillResult(true, now.getTime());
+	}
 }

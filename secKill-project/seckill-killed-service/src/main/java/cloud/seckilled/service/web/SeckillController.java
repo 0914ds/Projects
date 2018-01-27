@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,12 +29,13 @@ public class SeckillController {
     @Autowired
     private SeckillService seckillService;
 
+     @Value("${server.port}")
+     private String port;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List list() {
-
+    public List<Seckill> list() {
+        System.out.println("==========>>>>>>this is service:  "+port);
         List<Seckill> list = seckillService.getSeckillList();
-
         return list;
     }
 

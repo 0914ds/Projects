@@ -11,6 +11,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,21 +35,35 @@ public class WebService {
 	 final String SERVICE_NAME="seckill-killed-service";
 	 
 	@SuppressWarnings("unchecked")
-	@HystrixCommand(fallbackMethod = "fallbackList")
+	//@HystrixCommand(fallbackMethod = "fallbackList")
 	 public List<Seckill> getSeckillList(){
-		    List<Seckill> list =null;
-			  list = restTemplate.getForObject("http://"+SERVICE_NAME+"/seckill/list", List.class);
-			 return list;
+		  //  List<Seckill> list =null;
+			 // list = restTemplate.getForObject("http://"+SERVICE_NAME+"/seckill/list", List.class);
+			//  list = (List<Seckill>) restTemplate.getForEntity("http://"+SERVICE_NAME+"/seckill/list", List.class);
+		    ResponseEntity<List<Seckill>>	list = restTemplate.exchange("http://"+SERVICE_NAME+"/seckill/list", HttpMethod.GET, null,new ParameterizedTypeReference<List<Seckill>>(){});
+		   System.out.println("=================>>>");
+		    return list.getBody();
 	 }
 	 public List<Seckill> fallbackList(){
-		 return new ArrayList();
-	 }
-	 @HystrixCommand(fallbackMethod = "fallbackgetById")
-	 public Seckill getById(Long seckillId) {
+		 List list = new ArrayList();
+		 Seckill seckill = new Seckill();
+		 seckill.setCreateTime(new Date());
+		 seckill.setEndTime(new Date());
+		 seckill.setName("this is fallbackdata");
+		 seckill.setNumber(-1);
+		 seckill.setSeckillId(-1);
+		 seckill.setStartTime(new Date());
 		 
-		 Seckill seckill =restTemplate.getForObject("http://"+SERVICE_NAME+"/seckill/{seckillId}", Seckill.class,seckillId);
-		 System.out.println(seckill.toString());
-         return seckill;
+		 list.add(seckill);
+		 
+		 return list;
+	 }
+	 @HystrixCommand
+	 public Seckill getById(Long seckillId) {
+
+		 ResponseEntity<Seckill> seckill =restTemplate.exchange("http://"+SERVICE_NAME+"/seckill/{seckillId}",HttpMethod.GET, null,new ParameterizedTypeReference<Seckill>(){},seckillId);
+         seckill.getBody();
+		 return seckill.getBody();
 	 }
 	 public Seckill fallbackgetById(Long seckillId) {
 		 return new Seckill();

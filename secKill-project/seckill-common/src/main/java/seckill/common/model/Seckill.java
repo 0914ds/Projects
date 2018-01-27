@@ -1,13 +1,20 @@
 package seckill.common.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by wchb7 on 16-5-8.
  */
-public class Seckill {
+public class Seckill implements Serializable{
 
-    private long seckillId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3076272123495213688L;
+
+
+	private long seckillId;
 
     private String name;
 

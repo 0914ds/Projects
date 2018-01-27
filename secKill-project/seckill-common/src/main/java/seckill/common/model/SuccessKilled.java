@@ -1,14 +1,23 @@
 package seckill.common.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by wchb7 on 16-5-8.
  */
-public class SuccessKilled {
+public class SuccessKilled implements Serializable {
 
-    /**
-     * �?个秒�?seckill对应多个成功记录
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7643201214336645766L;
+
+
+	/**
+     * 涓?涓鏉?seckill瀵瑰簲澶氫釜鎴愬姛璁板綍
      */
     private Seckill seckill;
 
