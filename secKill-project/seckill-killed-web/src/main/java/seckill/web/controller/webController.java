@@ -43,7 +43,6 @@ public class webController {
 		// 获取列表页
 		List<Seckill> list = webService.getSeckillList();
 		model.addAttribute("list", list);
-		System.out.println("list.size===================>: " + list.size());
 		return "list";
 	}
 
@@ -55,7 +54,6 @@ public class webController {
 		}
 
 		Seckill seckill = webService.getById(seckillId);
-		System.out.println("seckill.toString=================seckill.toString======>=====>=>=>===>>>>>>" + seckill.toString());
 
 		if (seckill == null) {
 			return "forward:/seckill/list";

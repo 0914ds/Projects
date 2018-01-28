@@ -22,10 +22,6 @@ import seckill.common.model.Seckill;
 import seckill.common.model.SuccessKilled;
 import seckill.common.tools.Tools;
 
-/**
- * Created by wchb7 on 16-5-14.
- */
-
 @Service
 public class SeckillServiceImpl implements SeckillService {
 

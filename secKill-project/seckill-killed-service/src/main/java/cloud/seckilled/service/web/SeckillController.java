@@ -16,9 +16,6 @@ import cloud.seckilled.service.service.SeckillService;
 import seckill.common.dto.SeckillExecution;
 import seckill.common.model.Seckill;
 
-/**
- * Created by wchb7 on 16-5-23.
- */
 
 @RestController
 @RequestMapping("/seckill")//url:/模块/资源/{id}/细分

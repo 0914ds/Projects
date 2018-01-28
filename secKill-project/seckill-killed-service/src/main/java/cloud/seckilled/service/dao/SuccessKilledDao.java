@@ -4,9 +4,6 @@ import org.apache.ibatis.annotations.Param;
 
 import seckill.common.model.SuccessKilled;
 
-/**
- * Created by wchb7 on 16-5-8.
- */
 public interface SuccessKilledDao {
 
     /**

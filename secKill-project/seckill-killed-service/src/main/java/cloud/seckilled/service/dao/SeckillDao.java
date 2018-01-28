@@ -7,9 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import seckill.common.model.Seckill;
 
-/**
- * Created by wchb7 on 16-5-8.
- */
 public interface SeckillDao {
 
     /**

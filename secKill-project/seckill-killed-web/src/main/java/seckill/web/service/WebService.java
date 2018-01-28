@@ -31,19 +31,12 @@ public class WebService {
 	 @Autowired	 
 	 RestTemplate restTemplate;
 	
-	 /*@Autowired
-	 FeignUserService feignUserService;*/
-	 
 	 final String SERVICE_NAME="seckill-killed-service";
 	 
 	@SuppressWarnings("unchecked")
 	//@HystrixCommand(fallbackMethod = "fallbackList")
 	 public List<Seckill> getSeckillList(){
-		  //  List<Seckill> list =null;
-			 // list = restTemplate.getForObject("http://"+SERVICE_NAME+"/seckill/list", List.class);
-			//  list = (List<Seckill>) restTemplate.getForEntity("http://"+SERVICE_NAME+"/seckill/list", List.class);
 		    ResponseEntity<List<Seckill>>	list = restTemplate.exchange("http://"+SERVICE_NAME+"/seckill/list", HttpMethod.GET, null,new ParameterizedTypeReference<List<Seckill>>(){});
-		   System.out.println("=================>>>");
 		    return list.getBody();
 	 }
 	 public List<Seckill> fallbackList(){
