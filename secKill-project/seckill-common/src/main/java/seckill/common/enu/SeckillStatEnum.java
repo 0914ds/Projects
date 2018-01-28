@@ -10,7 +10,7 @@ public enum SeckillStatEnum {
     REPEAT_KILL(-1, "重复秒杀"),
     INNER_ERROR(-2, "系统异常"),
     DATA_REWRITE(-3, "数据篡改"),
-    NOT_LOGIN(-4, "未登�?");
+    NOT_LOGIN(-4, "未登陆");
 
     private int state;
 

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.text.html.FormSubmitEvent.MethodType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -92,37 +94,8 @@ public class WebService {
 	 }
 
 	 public SeckillExecution execute(Long seckillId,Long killPhone, String md5) {
-		 return restTemplate.getForObject("SERVICE_NAME"+"/{seckillId}/{killPhone}/{md5}", SeckillExecution.class, seckillId,md5,killPhone);
+		 ResponseEntity<SeckillExecution> ex =  restTemplate.exchange("http://"+SERVICE_NAME+"/seckill/{seckillId}/{killPhone}/{md5}", HttpMethod.POST,null,new ParameterizedTypeReference<SeckillExecution>(){}, seckillId,killPhone,md5);
+		return ex.getBody();
 	 }
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-//	 @HystrixCommand(fallbackMethod = "fallbackSearchAll")
-//	 public List<User> readUserInfo() {
-//	        return restTemplate.getForObject("http://"+SERVICE_NAME+"/user", List.class);
-//		 //return feignUserService.readUserInfo();
-//	 }	 
-//	 private List<User> fallbackSearchAll() {
-//		 System.out.println("HystrixCommand fallbackMethod handle!");
-//		 List<User> ls = new ArrayList<User>();
-//		 User user = new User();
-//		 user.setUsername("TestHystrixCommand");
-//		 ls.add(user);
-//		 return ls;
-//	 }
 }

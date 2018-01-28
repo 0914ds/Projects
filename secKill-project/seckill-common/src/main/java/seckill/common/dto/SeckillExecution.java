@@ -16,12 +16,12 @@ public class SeckillExecution implements Serializable {
     private long seckillId;
 
     /**
-     * 秒杀执行结果状�??
+     * 秒杀执行结果状�??
      */
     private int state;
 
     /**
-     * 状�?�表�?
+     * 状�?�表�?
      */
     private String stateInfo;
 
@@ -59,7 +59,11 @@ public class SeckillExecution implements Serializable {
         this.successKilled = successKilled;
     }
 
-    public SeckillExecution(long seckillId, SeckillStatEnum statEnum) {
+    
+    public SeckillExecution() {
+	}
+
+	public SeckillExecution(long seckillId, SeckillStatEnum statEnum) {
         this.seckillId = seckillId;
         this.state = statEnum.getState();
         this.stateInfo = statEnum.getStateInfo();

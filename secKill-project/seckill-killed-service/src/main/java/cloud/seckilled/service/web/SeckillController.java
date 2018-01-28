@@ -46,7 +46,7 @@ public class SeckillController {
     }
 
     @RequestMapping(value = "/{seckillId}/{killPhone}/{md5}", method = RequestMethod.POST)
-    public SeckillExecution execute(@PathVariable("seckillId") Long seckillId,@CookieValue(value = "killPhone", required = false) Long killPhone, @PathVariable("md5") String md5){
+    public SeckillExecution execute(@PathVariable("seckillId") Long seckillId,@PathVariable(value = "killPhone") Long killPhone, @PathVariable("md5") String md5){
     	SeckillExecution execution = seckillService.executeSeckill(seckillId, killPhone, md5);
     	return execution;
     	
